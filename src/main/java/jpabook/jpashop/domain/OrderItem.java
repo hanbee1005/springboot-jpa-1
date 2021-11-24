@@ -1,6 +1,8 @@
 package jpabook.jpashop.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -9,6 +11,7 @@ import static javax.persistence.FetchType.*;
 
 @Entity
 @Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OrderItem {
 
     @Id
@@ -26,6 +29,10 @@ public class OrderItem {
 
     private int orderPrice;  // 주문 가격
     private int count;  // 주문 수량
+
+    // createItem을 통한 생성만을 허용하기 위해 다른 생성자 차단 (@NoArgsConstructor(access = AccessLevel.PROTECTED)과 동일)
+//    protected OrderItem() {
+//    }
 
     // == 생성 메소드 == //
     public static OrderItem createItem(Item item, int orderPrice, int count) {
